@@ -17,3 +17,4 @@ enum class OrderType {
 
 #endif // TYPES_H
 
+// Added basic cryptocurrency types
