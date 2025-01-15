@@ -17,3 +17,4 @@ set(SOURCES
 # Create executable
 add_executable(crypto_simulator ${SOURCES})
 
+# Build system configured
