@@ -31,3 +31,4 @@ std::vector<std::shared_ptr<User>> UserManager::getAllUsers() {
     return users;
 }
 
+// User management system added
