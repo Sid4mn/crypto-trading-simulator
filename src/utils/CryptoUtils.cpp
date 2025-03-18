@@ -73,3 +73,4 @@ double calculatePercentageChange(double oldValue, double newValue) {
     return ((newValue - oldValue) / oldValue) * 100.0;
 }
 
+// Utility functions for formatting
