@@ -2,3 +2,4 @@
 // Portfolio foundation added
 // Cash balance management implemented
 // Transaction history tracking
+// Portfolio value calculations
