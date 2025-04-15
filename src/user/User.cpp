@@ -17,3 +17,4 @@ Portfolio& User::getPortfolio() {
     return portfolio;
 }
 
+// User statistics tracking
