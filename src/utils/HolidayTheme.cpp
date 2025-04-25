@@ -33,3 +33,4 @@ void displayHolidayTheme() {
     std::cout << std::string(50, '=') << "\n" << std::endl;
 }
 
+// Fun holiday theme easter egg
