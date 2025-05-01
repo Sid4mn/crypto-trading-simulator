@@ -92,3 +92,4 @@ This document outlines the features and capabilities of the Crypto Trading Simul
 ## Conclusion
 The Crypto Trading Simulator provides a solid foundation for cryptocurrency trading education and research, with a clean architecture that supports future enhancements and scalability.
 
+# Updated feature specifications
