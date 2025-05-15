@@ -5,7 +5,6 @@
 #include <algorithm>
 
 PriceAlert::PriceAlert() {
-    // Default empty constructor
 }
 
 std::string PriceAlert::createAlert(const std::string& userId, CryptoType crypto, 
@@ -19,7 +18,12 @@ std::string PriceAlert::createAlert(const std::string& userId, CryptoType crypto
     alert.targetValue = targetValue;
     alert.isActive = true;
     alert.createdAt = getCurrentTimestamp();
-    alert.message = message.empty() ? "Price alert triggered!" : message;
+    
+    if(message.empty()) {
+        alert.message = "Price alert triggered!";
+    } else {
+        alert.message = message;
+    }
     
     alerts.push_back(alert);
     return alert.id;

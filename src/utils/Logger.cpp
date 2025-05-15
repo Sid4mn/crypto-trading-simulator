@@ -4,7 +4,6 @@
 #include <iomanip>
 #include <sstream>
 
-// Global logger instance
 Logger* g_logger = nullptr;
 
 Logger::Logger(const std::string& filename) 

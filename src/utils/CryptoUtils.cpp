@@ -4,8 +4,6 @@
 #include <algorithm>
 #include <cctype>
 
-// Utility functions for crypto trading simulator
-
 std::string formatCurrency(double amount) {
     std::stringstream ss;
     ss << "$" << std::fixed << std::setprecision(2) << amount;
@@ -20,7 +18,7 @@ std::string formatCryptoAmount(double amount) {
 
 double roundToDecimals(double value, int decimals) {
     if (decimals < 0) decimals = 0;
-    if (decimals > 10) decimals = 10;  // Reasonable limit
+    if (decimals > 10) decimals = 10;  
     
     double factor = 1.0;
     for (int i = 0; i < decimals; ++i) {

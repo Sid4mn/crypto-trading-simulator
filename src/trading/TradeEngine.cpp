@@ -2,19 +2,16 @@
 #include <iostream>
 
 TradeEngine::TradeEngine() {
-    // Initialize trade engine
 }
 
 bool TradeEngine::executeTrade(Portfolio& portfolio, CryptoType crypto, OrderType type, double amount) {
-    // Basic trade execution logic
     if (type == OrderType::BUY) {
-        // Check if user has enough cash
         MarketData market;
         double price = market.getPrice(crypto);
         double totalCost = amount * price;
         
         if (portfolio.getCashBalance() >= totalCost) {
-            // Execute buy order (simplified)
+            // TODO: actually update portfolio
             std::cout << "Executing buy order for " << amount << " units at $" << price << std::endl;
             return true;
         } else {
@@ -22,9 +19,10 @@ bool TradeEngine::executeTrade(Portfolio& portfolio, CryptoType crypto, OrderTyp
             return false;
         }
     } else {
-        // Execute sell order
+        // sell order
         double holding = portfolio.getHolding(crypto);
         if (holding >= amount) {
+            // TODO: actually update portfolio
             std::cout << "Executing sell order for " << amount << " units" << std::endl;
             return true;
         } else {

@@ -8,7 +8,7 @@ int main() {
     std::cout << "================================" << std::endl;
     
     MarketData market;
-    Portfolio portfolio("user1", 50000.0);  // Start with 0,000
+    Portfolio portfolio("user1", 50000.0);  // Start with 50,000
     TradeEngine engine;
     
     std::cout << "Initial Portfolio:" << std::endl;
@@ -19,7 +19,10 @@ int main() {
     
     // Try to buy some Bitcoin
     std::cout << "\nAttempting to buy 0.1 Bitcoin..." << std::endl;
-    engine.executeTrade(portfolio, CryptoType::BITCOIN, OrderType::BUY, 0.1);
+    bool result = engine.executeTrade(portfolio, CryptoType::BITCOIN, OrderType::BUY, 0.1);
+    if(result) {
+        std::cout << "Trade successful!" << std::endl;
+    }
     
     std::cout << "\nUpdated Portfolio:" << std::endl;
     std::cout << "Cash: $" << portfolio.getCashBalance() << std::endl;
@@ -35,4 +38,3 @@ int main() {
     
     return 0;
 }
-
