@@ -2,7 +2,6 @@
 
 User::User(const std::string& userId, const std::string& username) 
     : userId(userId), username(username), portfolio(userId) {
-    // Initialize user with portfolio
 }
 
 std::string User::getUserId() const {
@@ -16,5 +15,3 @@ std::string User::getUsername() const {
 Portfolio& User::getPortfolio() {
     return portfolio;
 }
-
-// User statistics tracking
