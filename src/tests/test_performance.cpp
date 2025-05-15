@@ -116,3 +116,4 @@ int main() {
     return 0;
 }
 
+// Performance testing suite
