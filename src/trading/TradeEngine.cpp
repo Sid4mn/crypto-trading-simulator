@@ -11,7 +11,8 @@ bool TradeEngine::executeTrade(Portfolio& portfolio, CryptoType crypto, OrderTyp
         double totalCost = amount * price;
         
         if (portfolio.getCashBalance() >= totalCost) {
-            // TODO: actually update portfolio
+            portfolio.removeCash(totalCost);
+            portfolio.addHolding(crypto, amount);
             std::cout << "Executing buy order for " << amount << " units at $" << price << std::endl;
             return true;
         } else {
@@ -22,7 +23,10 @@ bool TradeEngine::executeTrade(Portfolio& portfolio, CryptoType crypto, OrderTyp
         // sell order
         double holding = portfolio.getHolding(crypto);
         if (holding >= amount) {
-            // TODO: actually update portfolio
+            portfolio.removeHolding(crypto, amount);
+            MarketData market;
+            double price = market.getPrice(crypto);
+            portfolio.addCash(amount * price);
             std::cout << "Executing sell order for " << amount << " units" << std::endl;
             return true;
         } else {
