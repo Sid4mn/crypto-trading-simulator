@@ -4,7 +4,7 @@
 #include "include/TradeEngine.h"
 
 int main() {
-    std::cout << "Crypto Trading Simulator v0.4" << std::endl;
+    std::cout << "Crypto Trading Simulator v0.5" << std::endl;
     std::cout << "================================" << std::endl;
     
     MarketData market;
