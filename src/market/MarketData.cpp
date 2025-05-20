@@ -9,11 +9,11 @@ MarketData::MarketData() {
 double MarketData::getPrice(CryptoType crypto) {
     // hardcoded prices for now
     std::map<CryptoType, double> prices;
-    prices[CryptoType::BITCOIN] = 50000.0;
-    prices[CryptoType::ETHEREUM] = 3000.0;
-    prices[CryptoType::LITECOIN] = 100.0;
-    prices[CryptoType::RIPPLE] = 0.5;
-    prices[CryptoType::CARDANO] = 1.0;
+    prices[CryptoType::BITCOIN] = 45000.0;  // updated price
+    prices[CryptoType::ETHEREUM] = 2800.0;
+    prices[CryptoType::LITECOIN] = 95.0;
+    prices[CryptoType::RIPPLE] = 0.48;
+    prices[CryptoType::CARDANO] = 0.95;
     
     // add some randomness to make it more realistic
     std::random_device rd;
