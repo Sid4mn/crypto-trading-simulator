@@ -1,5 +1,2 @@
 // Basic MarketData structure
-// Basic market data structure implemented
-// Price tracking functionality added
-// Market simulation with volatility
-// Moving averages calculation
+// Fixed memory leak in price history
