@@ -1,5 +1,2 @@
 // Trading engine foundation
-// Basic trading engine created
-// Buy/sell functionality added
-// Error handling and validation
-// Order management system
+// Improved error messages for better debugging
