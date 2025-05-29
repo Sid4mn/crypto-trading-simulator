@@ -93,3 +93,17 @@ This document outlines the features and capabilities of the Crypto Trading Simul
 The Crypto Trading Simulator provides a solid foundation for cryptocurrency trading education and research, with a clean architecture that supports future enhancements and scalability.
 
 # Updated feature specifications
+### Price Alerts
+- Set alerts for price thresholds
+- Monitor multiple cryptocurrencies
+- Customizable notification messages
+
+### Trading Statistics  
+- Track profit/loss over time
+- Calculate win/loss ratios
+- Performance analytics
+
+### Configuration System
+- Customizable application settings
+- User preferences management
+- Environment-specific configurations
