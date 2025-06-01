@@ -18,6 +18,7 @@ set(SOURCES
     src/utils/PriceAlert.cpp
     src/utils/TradingStats.cpp
     src/utils/Config.cpp
+    src/utils/Logger.cpp
     src/utils/HolidayTheme.cpp
 )
 
