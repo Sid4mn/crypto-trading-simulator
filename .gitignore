@@ -1,26 +1,31 @@
 # Build directories
 build/
 cmake-build-*/
+out/
 
 # Compiled binaries
 *.exe
 *.out
 *.app
+crypto_simulator
+crypto_sim_modular
 
 # Object files
 *.o
 *.obj
+*.so
+*.dll
+*.dylib
 
-# Libraries
+# Static libraries
 *.lib
 *.a
 *.la
 *.lo
 
-# Shared objects
-*.dll
-*.so
-*.dylib
+# Debug files
+*.dSYM/
+*.pdb
 
 # IDE files
 .vscode/
@@ -28,8 +33,54 @@ cmake-build-*/
 *.swp
 *.swo
 *~
+*.user
+*.vcxproj.user
 
-# OS files
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 
+# CMake files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+
+# Package files
+*.deb
+*.rpm
+*.tar.gz
+*.zip
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Coverage files
+*.gcov
+*.gcda
+*.gcno
+coverage/
+
+# Profiling files
+*.prof
+gmon.out
+
+# Backup files
+*.bak
+*.backup
+
+
+# Log files
+*.log
+logs/
