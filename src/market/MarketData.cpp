@@ -9,8 +9,8 @@ MarketData::MarketData() {
 double MarketData::getPrice(CryptoType crypto) {
     // hardcoded prices for now
     std::map<CryptoType, double> prices;
-    prices[CryptoType::BITCOIN] = 45000.0;  // updated price
-    prices[CryptoType::ETHEREUM] = 2800.0;
+    prices[CryptoType::BITCOIN] = 42000.0;  // market correction
+    prices[CryptoType::ETHEREUM] = 2700.0;
     prices[CryptoType::LITECOIN] = 95.0;
     prices[CryptoType::RIPPLE] = 0.48;
     prices[CryptoType::CARDANO] = 0.95;
