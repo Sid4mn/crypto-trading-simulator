@@ -11,10 +11,11 @@ A C++ cryptocurrency trading simulator for educational purposes.
 
 ### Core Functionality
 - **Multi-Cryptocurrency Support**: Trade Bitcoin, Ethereum, Litecoin, Ripple, and Cardano
-- **Real-time Market Simulation**: Realistic price movements with volatility modeling
+- **Real-time Market Simulation**: Realistic price movements with volatility modeling  
 - **Portfolio Management**: Track cash balances and cryptocurrency holdings
 - **Transaction History**: Complete audit trail of all trading activities
 - **User Management**: Support for multiple user accounts
+- **Market Analysis**: Built-in technical indicators and price tracking
 
 ### Advanced Features
 - **Order Management**: Place, track, and cancel pending orders
