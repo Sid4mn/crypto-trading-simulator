@@ -2,8 +2,6 @@
 #include <ctime>
 #include <string>
 
-// Holiday-themed messages for the crypto simulator
-
 std::string getHolidayMessage() {
     std::time_t now = std::time(nullptr);
     std::tm* localTime = std::localtime(&now);
@@ -33,4 +31,3 @@ void displayHolidayTheme() {
     std::cout << std::string(50, '=') << "\n" << std::endl;
 }
 
-// Fun holiday theme easter egg

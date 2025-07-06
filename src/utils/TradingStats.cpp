@@ -34,13 +34,13 @@ TradingStats::PerformanceMetrics TradingStats::calculateMetrics() {
     std::map<CryptoType, double> cryptoProfits;
     
     for (const auto& tx : transactions) {
-        if (tx.type == OrderType::BUY) {
-            totalBuyValue += tx.totalValue;
+        if (tx.orderType == OrderType::BUY) {
+            totalBuyValue += tx.amount * tx.price;
         } else {
-            totalSellValue += tx.totalValue;
+            totalSellValue += tx.amount * tx.price;
             
             // Simple profit calculation (sell - average buy price)
-            double profit = tx.totalValue * 0.02; // Simplified 2% profit assumption
+            double profit = tx.amount * tx.price * 0.02; // Simplified 2% profit assumption
             if (profit > 0) {
                 metrics.totalProfit += profit;
                 metrics.winningTrades++;
@@ -51,10 +51,10 @@ TradingStats::PerformanceMetrics TradingStats::calculateMetrics() {
                 metrics.largestLoss = std::max(metrics.largestLoss, std::abs(profit));
             }
             
-            cryptoProfits[tx.crypto] += profit;
+            cryptoProfits[tx.cryptoType] += profit;
         }
         
-        metrics.averageTradeSize += tx.totalValue;
+        metrics.averageTradeSize += tx.amount * tx.price;
     }
     
     // Calculate derived metrics
@@ -111,8 +111,8 @@ double TradingStats::getMonthlyProfitLoss(int year, int month) const {
     
     for (const auto& tx : transactions) {
         // Simplified date parsing - in real implementation would parse timestamp
-        if (tx.type == OrderType::SELL) {
-            monthlyPL += tx.totalValue * 0.02; // Simplified calculation
+        if (tx.orderType == OrderType::SELL) {
+            monthlyPL += tx.amount * tx.price * 0.02; // Simplified calculation
         }
     }
     
@@ -144,13 +144,13 @@ void TradingStats::reset() {
 }
 
 void TradingStats::updateCryptoStats(const Transaction& transaction) {
-    auto& stats = cryptoStats[transaction.crypto];
-    stats.crypto = transaction.crypto;
+    auto& stats = cryptoStats[transaction.cryptoType];
+    stats.crypto = transaction.cryptoType;
     stats.trades++;
-    stats.volume += transaction.totalValue;
+    stats.volume += transaction.amount * transaction.price;
     
-    if (transaction.type == OrderType::SELL) {
-        stats.totalProfit += transaction.totalValue * 0.02; // Simplified
+    if (transaction.orderType == OrderType::SELL) {
+        stats.totalProfit += transaction.amount * transaction.price * 0.02; // Simplified
     }
     
     stats.averageReturn = stats.trades > 0 ? stats.totalProfit / stats.trades : 0.0;
