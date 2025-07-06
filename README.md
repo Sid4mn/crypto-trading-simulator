@@ -26,7 +26,7 @@ A C++ cryptocurrency trading simulator for educational purposes.
 - **Configuration System**: Customizable application settings
 - **Logging System**: Detailed logging for debugging and monitoring
 
-## 🛠️ Technical Stack
+## Technical Stack
 
 - **Language**: C++17
 - **Build System**: CMake 3.10+
@@ -34,7 +34,7 @@ A C++ cryptocurrency trading simulator for educational purposes.
 - **Memory Management**: Smart pointers and RAII principles
 - **Testing**: Unit tests for core functionality
 
-## 🔧 Installation
+## Installation
 
 1. Clone the repository:
 ```bash
@@ -58,7 +58,7 @@ cmake ..
 make
 ```
 
-## 🚀 Usage
+## Usage
 
 ### Basic Usage
 Run the main simulator:
@@ -80,7 +80,7 @@ Execute unit tests:
 ./test_trade_engine
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 crypto_simulator/
@@ -97,7 +97,7 @@ crypto_simulator/
 └── README.md            # Project documentation
 ```
 
-## 📚 Documentation
+## Documentation
 
 - [Feature Specifications](src/docs/Feature_Specifications.md)
 - [API Documentation](src/docs/API_Documentation.md)
