@@ -84,4 +84,3 @@ gmon.out
 # Log files
 *.log
 logs/
-fix_git_history.sh
