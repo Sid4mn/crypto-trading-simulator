@@ -116,5 +116,3 @@ double avg = market.calculateMovingAverage(CryptoType::BITCOIN, 7);
 // Simulate market movement
 market.simulateMarketMovement();
 ```
-
-# Complete API documentation
