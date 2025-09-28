@@ -2,8 +2,10 @@
 #define PORTFOLIO_H
 
 #include "Types.h"
+#include "MarketData.h"
 #include <string>
 #include <map>
+#include <vector>
 
 class Portfolio {
 public:
@@ -20,10 +22,18 @@ public:
     
     bool removeHolding(CryptoType crypto, double amount);
     
+    // Additional methods for modular version
+    double getTotalValue(const MarketData& marketData) const;
+    std::vector<Transaction> getTransactionHistory() const;
+    const std::map<CryptoType, double>& getHoldings() const { return holdings; }
+    
 private:
     std::string userId;
     double cashBalance;
     std::map<CryptoType, double> holdings;
+    std::vector<Transaction> transactions; // track transaction history
+    
+    void recordTransaction(CryptoType crypto, OrderType orderType, double amount, double price);
 };
 
 #endif // PORTFOLIO_H

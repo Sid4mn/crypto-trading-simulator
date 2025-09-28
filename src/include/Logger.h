@@ -1,54 +1,57 @@
-#ifndef LOGGER_H
-#define LOGGER_H
-
-#include <string>
+#pragma once
+#include <iostream>
 #include <fstream>
-#include <memory>
+#include <string>
+#include <mutex>
+#include <chrono>
+#include <ctime>
 
-/**
- * @brief Simple logging system for the crypto trading simulator
- */
 class Logger {
-public:
-    enum class LogLevel {
-        DEBUG,
-        INFO,
-        WARNING,
-        ERROR
-    };
-
 private:
-    std::unique_ptr<std::ofstream> logFile;
-    LogLevel currentLevel;
-    bool consoleOutput;
-
+    std::ofstream logFile;
+    std::mutex logMutex;
+    
+    // singleton stuff
+    Logger() {
+        logFile.open("trading_simulator.log", std::ios::app);
+    }
+    
 public:
-    Logger(const std::string& filename = "crypto_simulator.log");
-    ~Logger();
+    static Logger& getInstance() {
+        static Logger instance;
+        return instance;
+    }
     
-    void setLogLevel(LogLevel level);
-    void enableConsoleOutput(bool enable);
+    // delete copy/move constructors for singleton
+    Logger(const Logger&) = delete;
+    Logger& operator=(const Logger&) = delete;
     
-    void debug(const std::string& message);
-    void info(const std::string& message);
-    void warning(const std::string& message);
-    void error(const std::string& message);
+    void log(const std::string& message) {
+        std::lock_guard<std::mutex> lock(logMutex);
+        
+        auto now = std::chrono::system_clock::now();
+        auto time_t = std::chrono::system_clock::to_time_t(now);
+        
+        // both console and file
+        std::cout << "[" << std::put_time(std::localtime(&time_t), "%Y-%m-%d %H:%M:%S") 
+                  << "] " << message << std::endl;
+        
+        if (logFile.is_open()) {
+            logFile << "[" << std::put_time(std::localtime(&time_t), "%Y-%m-%d %H:%M:%S") 
+                    << "] " << message << std::endl;
+            logFile.flush();
+        }
+    }
     
-    void log(LogLevel level, const std::string& message);
-
-private:
-    std::string getCurrentTimestamp() const;
-    std::string levelToString(LogLevel level) const;
-    void writeLog(LogLevel level, const std::string& message);
+    // keep backwards compatibility
+    void info(const std::string& message) { log("[INFO] " + message); }
+    void debug(const std::string& message) { log("[DEBUG] " + message); }
+    void warning(const std::string& message) { log("[WARN] " + message); }
+    void error(const std::string& message) { log("[ERROR] " + message); }
+    
+    ~Logger() {
+        if (logFile.is_open()) {
+            logFile.close();
+        }
+    }
 };
-
-// Global logger instance
-extern Logger* g_logger;
-
-// Convenience macros
-#define LOG_DEBUG(msg) if(g_logger) g_logger->debug(msg)
-#define LOG_INFO(msg) if(g_logger) g_logger->info(msg)
-#define LOG_WARNING(msg) if(g_logger) g_logger->warning(msg)
-#define LOG_ERROR(msg) if(g_logger) g_logger->error(msg)
-
-#endif // LOGGER_H

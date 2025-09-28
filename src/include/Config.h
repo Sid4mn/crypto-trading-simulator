@@ -1,112 +1,90 @@
-#ifndef CONFIG_H
-#define CONFIG_H
-
+#pragma once
+#include <unordered_map>
 #include <string>
-#include <map>
-#include <vector>
+#include <fstream>
+#include <sstream>
 
-/**
- * @brief Configuration Management System
- * 
- * Handles application settings and user preferences
- */
 class Config {
-public:
-    struct TradingConfig {
-        double defaultCashBalance;
-        double maxTradeAmount;
-        double minTradeAmount;
-        bool enableRiskWarnings;
-        bool enablePriceAlerts;
-        int maxActiveOrders;
-        double volatilityMultiplier;
-    };
-
-    struct DisplayConfig {
-        bool showColors;
-        int decimalPlaces;
-        std::string dateFormat;
-        bool showPercentages;
-        bool compactMode;
-    };
-
 private:
-    TradingConfig tradingConfig;
-    DisplayConfig displayConfig;
-    std::map<std::string, std::string> customSettings;
-    std::string configFilePath;
-
+    std::unordered_map<std::string, std::string> settings;
+    
+    Config() {
+        loadDefaults();
+        // try to load from file, ignore if doesnt exist
+        loadFromFile("config.txt");
+    }
+    
+    void loadDefaults() {
+        settings["initial_cash"] = "10000.0";
+        settings["max_trade_size"] = "1000.0";
+        settings["commission_rate"] = "0.001";
+        settings["volatility_factor"] = "0.02";
+        settings["max_price_history"] = "100";
+        // might add more later as we expand features
+    }
+    
+    void loadFromFile(const std::string& filename) {
+        std::ifstream file(filename);
+        if (!file.is_open()) return; // no config file, use defaults
+        
+        std::string line;
+        while (std::getline(file, line)) {
+            if (line.empty() || line[0] == '#') continue;
+            
+            size_t pos = line.find('=');
+            if (pos != std::string::npos) {
+                std::string key = line.substr(0, pos);
+                std::string value = line.substr(pos + 1);
+                // basic trim
+                key.erase(0, key.find_first_not_of(" \t"));
+                key.erase(key.find_last_not_of(" \t") + 1);
+                value.erase(0, value.find_first_not_of(" \t"));
+                value.erase(value.find_last_not_of(" \t") + 1);
+                
+                settings[key] = value;
+            }
+        }
+    }
+    
 public:
-    Config();
+    static Config& getInstance() {
+        static Config instance;
+        return instance;
+    }
     
-    /**
-     * @brief Load configuration from file
-     * @param filePath Path to configuration file
-     * @return True if loaded successfully
-     */
-    bool loadFromFile(const std::string& filePath);
+    Config(const Config&) = delete;
+    Config& operator=(const Config&) = delete;
     
-    /**
-     * @brief Save configuration to file
-     * @param filePath Path to save configuration
-     * @return True if saved successfully
-     */
-    bool saveToFile(const std::string& filePath);
+    double getDouble(const std::string& key, double defaultValue = 0.0) const {
+        auto it = settings.find(key);
+        if (it != settings.end()) {
+            try {
+                return std::stod(it->second);
+            } catch (...) {
+                // bad conversion, return default
+            }
+        }
+        return defaultValue;
+    }
     
-    /**
-     * @brief Get trading configuration
-     * @return Trading configuration struct
-     */
-    const TradingConfig& getTradingConfig() const;
+    int getInt(const std::string& key, int defaultValue = 0) const {
+        auto it = settings.find(key);
+        if (it != settings.end()) {
+            try {
+                return std::stoi(it->second);
+            } catch (...) {
+                // bad conversion, return default
+            }
+        }
+        return defaultValue;
+    }
     
-    /**
-     * @brief Get display configuration
-     * @return Display configuration struct
-     */
-    const DisplayConfig& getDisplayConfig() const;
+    std::string getString(const std::string& key, const std::string& defaultValue = "") const {
+        auto it = settings.find(key);
+        return (it != settings.end()) ? it->second : defaultValue;
+    }
     
-    /**
-     * @brief Set trading configuration
-     * @param config New trading configuration
-     */
-    void setTradingConfig(const TradingConfig& config);
-    
-    /**
-     * @brief Set display configuration
-     * @param config New display configuration
-     */
-    void setDisplayConfig(const DisplayConfig& config);
-    
-    /**
-     * @brief Set custom setting
-     * @param key Setting key
-     * @param value Setting value
-     */
-    void setSetting(const std::string& key, const std::string& value);
-    
-    /**
-     * @brief Get custom setting
-     * @param key Setting key
-     * @param defaultValue Default value if key not found
-     * @return Setting value
-     */
-    std::string getSetting(const std::string& key, const std::string& defaultValue = "") const;
-    
-    /**
-     * @brief Reset to default configuration
-     */
-    void resetToDefaults();
-    
-    /**
-     * @brief Get configuration summary
-     * @return String summary of current configuration
-     */
-    std::string getConfigSummary() const;
-
-private:
-    void setDefaults();
-    std::vector<std::string> split(const std::string& str, char delimiter) const;
-    std::string trim(const std::string& str) const;
+    void setSetting(const std::string& key, const std::string& value) {
+        settings[key] = value;
+    }
 };
-
-#endif // CONFIG_H
