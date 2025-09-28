@@ -1,33 +1,27 @@
 # Crypto Trading Simulator
 
-A C++ cryptocurrency trading simulator for educational purposes.
+A C++ learning project implementing a basic cryptocurrency trading simulator.
 
-## Project Goals
-- Learn C++ programming
-- Understand cryptocurrency markets
-- Practice object-oriented design
+## What This Is
+Built this while learning C++ and trying to understand how trading systems work. Started simple with basic buy/sell operations and gradually added more features over a few months.
 
 ## Features
 
-### Core Functionality
-- **Multi-Cryptocurrency Support**: Trade Bitcoin, Ethereum, Litecoin, Ripple, and Cardano
-- **Real-time Market Simulation**: Realistic price movements with volatility modeling  
-- **Portfolio Management**: Track cash balances and cryptocurrency holdings
+### Core Trading:
+- **Multi-Cryptocurrency Support**: Trade 5 cryptocurrencies (Bitcoin, Ethereum, Litecoin, Ripple, Cardano)
+- **Portfolio Management**: Basic portfolio tracking (cash + holdings)
 - **Transaction History**: Complete audit trail of all trading activities
-- **User Management**: Support for multiple user accounts
-- **Market Analysis**: Built-in technical indicators and price tracking
+- **Market Analysis**: Market price simulation with some volatility
 
-### Advanced Features
-- **Order Management**: Place, track, and cancel pending orders
-- **Technical Analysis**: Moving averages and price history tracking
-- **Risk Management**: Built-in validation and error handling
-- **Performance Optimization**: Efficient algorithms for high-frequency operations
-- **Price Alerts**: Set custom alerts for price thresholds
-- **Trading Statistics**: Comprehensive performance analytics and metrics
-- **Configuration System**: Customizable application settings
-- **Logging System**: Detailed logging for debugging and monitoring
+### Additional Stuff:
+- User accounts and management
+- Price alerts when coins hit target prices
+- Trading statistics (profit/loss, etc.)
+- Some technical indicators (moving averages)
+- Configuration file support
+- Basic logging
 
-## Technical Stack
+## Requirements
 
 - **Language**: C++17
 - **Build System**: CMake 3.10+
@@ -81,26 +75,12 @@ Execute unit tests:
 ./test_trade_engine
 ```
 
-## Project Structure
-
-```
-crypto_simulator/
-├── src/
-│   ├── include/          # Header files
-│   ├── market/           # Market data implementation
-│   ├── portfolio/        # Portfolio management
-│   ├── trading/          # Trading engine
-│   ├── user/             # User management
-│   ├── utils/            # Utility functions
-│   ├── tests/            # Unit tests
-│   └── docs/             # Documentation
-├── CMakeLists.txt        # Build configuration
-└── README.md            # Project documentation
-```
-
 ## Documentation
 
 - [Feature Specifications](src/docs/Feature_Specifications.md)
 - [API Documentation](src/docs/API_Documentation.md)
 
----
+## Notes
+This was mainly a learning project to get familiar with C++ design patterns, memory management, and building something more complex than simple exercises. The "market simulation" is pretty basic - just random price movements with some volatility modeling.
+
+Performance isn't optimized for high-frequency trading or anything like that. It's more about understanding the concepts and practicing clean code organization.
