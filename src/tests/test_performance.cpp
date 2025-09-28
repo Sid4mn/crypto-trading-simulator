@@ -39,7 +39,7 @@ public:
     void testTradingPerformance() {
         std::cout << "\nTesting trading performance..." << std::endl;
         
-        Portfolio portfolio("perf_test", 1000000.0);  // M starting balance
+        Portfolio portfolio("perf_test", 1000000.0); // M starting balance
         
         auto start = std::chrono::high_resolution_clock::now();
         
@@ -47,7 +47,7 @@ public:
         for (int i = 0; i < 100; ++i) {
             CryptoType crypto = static_cast<CryptoType>(i % 5);
             OrderType type = (i % 2 == 0) ? OrderType::BUY : OrderType::SELL;
-            double amount = 0.01 + (i % 10) * 0.001;  // Variable amounts
+            double amount = 0.01 + (i % 10) * 0.001; // Variable amounts
             
             engine->executeTrade(portfolio, crypto, type, amount);
         }
@@ -115,5 +115,3 @@ int main() {
     
     return 0;
 }
-
-// Performance testing suite
